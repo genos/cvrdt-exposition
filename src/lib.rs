@@ -8,7 +8,7 @@
 //! This code is solely for my own edification and is _not_ meant for production use.
 //! There are already much better options for usable CRDTs in Rust; see the [`rust-crdt`](https://github.com/rust-crdt/rust-crdt) project.
 //!
-//! ## What is a CvRDT?
+//! ## What makes a CvRDT?
 //!
 //! Quoting the [Wikipedia article on CRDTs](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type),
 //! > CvRDTs send their full local state to other replicas, where the states are merged by a function which must be commutative, associative, and idempotent.
@@ -87,7 +87,7 @@
 //! - [`meangirls`](https://github.com/aphyr/meangirls)
 //! - [The `proptest` book](https://altsysrq.github.io/proptest-book/intro.html)
 #![crate_type = "lib"]
-//#![deny(missing_docs)]
+#![deny(missing_docs)]
 
 /// Our two traits defining CvRDTs
 pub mod traits;
