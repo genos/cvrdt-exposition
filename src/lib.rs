@@ -44,8 +44,7 @@
 //!
 //! Per the [Wikipedia article](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type), consider a one-way boolean flag that, once true, can never revert to false:
 //! ```rust
-//! use cvrdt_exposition::one_way_boolean::OneWayBoolean;
-//! use cvrdt_exposition::traits::Grow;
+//! use cvrdt_exposition::{Grow, OneWayBoolean};
 //! let node0 = OneWayBoolean::new(false);
 //! let mut node1 = OneWayBoolean::new(false);
 //! node1.add(());
@@ -57,7 +56,7 @@
 //!
 //! ## How `cvrdt-exposition` verifies properties
 //!
-//! In the absence of using format methods like [TLA+](https://learntla.com/introduction/) (see also Hillel Wayne's [excellent book!](https://learntla.com/book/)), we resort to property-based testing via the [`proptest` crate](https://crates.io/crates/proptest).
+//! In the absence of using formal methods like [TLA+](https://learntla.com/introduction/) (see also Hillel Wayne's [excellent book!](https://learntla.com/book/)), we resort to property-based testing via the [`proptest` crate](https://crates.io/crates/proptest).
 //! This excellent crate is listed as a `dev-dependency` in [`cvrdt-exposition`'s `Cargo.tml` file](https://github.com/genos/cvrdt-exposition/blob/main/Cargo.toml), so if you can just use the stuff in this library (although [you shouldn't!](do-not-use-this)) without pulling in an extra dependency.
 //! That said, I highly recommend learning to use `proptest`, [`quickcheck`](https://crates.io/crates/quickcheck), or some other [property testing framework](https://crates.io/search?q=property%20testing) for Rust.
 //!
@@ -105,6 +104,17 @@ pub mod pn_counter;
 /// Two-Phase Set
 pub mod two_phase_set;
 
-// PBT for CvRDT properties
+/// Top-level re-exports for CRDT structures and traits
+pub use crate::{
+    g_counter::GCounter,
+    g_set::GSet,
+    lww_register::LWWRegister,
+    one_way_boolean::OneWayBoolean,
+    pn_counter::PNCounter,
+    traits::{Grow, Shrink},
+    two_phase_set::TwoPhaseSet,
+};
+
+/// PBT for CvRDT properties
 #[cfg(test)]
 pub mod properties;
