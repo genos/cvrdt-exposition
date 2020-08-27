@@ -2,8 +2,8 @@ use crate::traits::Grow;
 
 #[derive(Debug, Clone)]
 pub struct GCounter {
-    pub id: usize,
-    pub counts: Vec<u64>,
+    id: usize,
+    counts: Vec<u64>,
 }
 
 impl GCounter {

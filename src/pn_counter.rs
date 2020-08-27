@@ -2,9 +2,9 @@ use crate::traits::{Grow, Shrink};
 
 #[derive(Debug, Clone)]
 pub struct PNCounter {
-    pub id: usize,
-    pub positive: Vec<u64>,
-    pub negative: Vec<u64>,
+    id: usize,
+    positive: Vec<u64>,
+    negative: Vec<u64>,
 }
 
 impl PNCounter {

@@ -16,7 +16,7 @@ use crate::traits::Grow;
 /// ```
 #[derive(Debug, Clone)]
 pub struct OneWayBoolean {
-    pub flag: bool,
+    flag: bool,
 }
 
 impl Grow for OneWayBoolean {
