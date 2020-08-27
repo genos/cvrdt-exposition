@@ -45,11 +45,11 @@
 //! Per the [Wikipedia article](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type), consider a one-way boolean flag that, once true, can never revert to false:
 //! ```rust
 //! use cvrdt_exposition::{Grow, OneWayBoolean};
-//! let node0 = OneWayBoolean::new(false);
-//! let mut node1 = OneWayBoolean::new(false);
-//! node1.add(());
-//! assert_eq!(node1.payload(), true);
-//! assert_eq!(node1.merge(&node0).payload(), true);
+//! let x = OneWayBoolean::new(false);
+//! let mut y = OneWayBoolean::new(false);
+//! y.add(());
+//! assert_eq!(y.payload(), true);
+//! assert_eq!(y.merge(&x).payload(), true);
 //! ```
 //!
 //! As the internal state of a `OneWayBoolean` is only a single boolean value, we could verify the implementation fulfills the CvRDT requirements  by hand (though I'd rather get my computer to do it! see below).
@@ -97,7 +97,7 @@ pub mod g_counter;
 pub mod g_set;
 /// Last-Writer-Wins Register
 pub mod lww_register;
-/// Simplest CvRDT example: a boolean flag that, once true, can never revert to false
+/// The simplest CvRDT example: a boolean flag that, once true, can never revert to false
 pub mod one_way_boolean;
 /// Positive-Negative Counter
 pub mod pn_counter;

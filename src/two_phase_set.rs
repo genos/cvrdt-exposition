@@ -4,8 +4,8 @@ use std::hash::Hash;
 
 #[derive(Debug, Clone)]
 pub struct TwoPhaseSet<X: Clone + Eq + Hash> {
-    added: HashSet<X>,
-    removed: HashSet<X>,
+    pub added: HashSet<X>,
+    pub removed: HashSet<X>,
 }
 
 impl<X: Clone + Eq + Hash> Grow for TwoPhaseSet<X> {

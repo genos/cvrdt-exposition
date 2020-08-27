@@ -4,7 +4,7 @@ use std::hash::Hash;
 
 #[derive(Debug, Clone)]
 pub struct GSet<X: Clone + Eq + Hash> {
-    values: HashSet<X>,
+    pub values: HashSet<X>,
 }
 
 impl<X: Clone + Eq + Hash> Grow for GSet<X> {

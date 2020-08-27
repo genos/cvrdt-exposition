@@ -1,8 +1,22 @@
 use crate::traits::Grow;
 
+/// A boolean flag that, once true, can never revert to false
+///
+/// # Example
+/// ```rust
+/// use cvrdt_exposition::{Grow, OneWayBoolean};
+/// let mut x = OneWayBoolean::new(false);
+/// x.add(());
+/// assert_eq!(x.payload(), true);
+/// assert_eq!(x.query(&()), true);
+/// for payload in vec![true, false] {
+///     let y = OneWayBoolean::new(payload);
+///     assert_eq!(x.merge(&y).payload(), y.merge(&x).payload());
+/// }
+/// ```
 #[derive(Debug, Clone)]
 pub struct OneWayBoolean {
-    flag: bool,
+    pub flag: bool,
 }
 
 impl Grow for OneWayBoolean {
