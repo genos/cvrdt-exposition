@@ -40,7 +40,9 @@ use std::time::Instant;
 /// ```
 #[derive(Debug, Clone)]
 pub struct LWWRegister<X: Clone + Eq> {
+    /// The value saved in this register
     pub value: X,
+    /// The time when this register was last saved
     pub timestamp: Instant,
 }
 

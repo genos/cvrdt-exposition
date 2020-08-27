@@ -2,8 +2,28 @@ use crate::traits::Grow;
 use std::collections::HashSet;
 use std::hash::Hash;
 
+/// A set that can only add values
+///
+/// # Examples
+///
+/// ```
+/// use std::collections::HashSet;
+/// use cvrdt_exposition::{Grow, GSet};
+/// let mut x = GSet::new(HashSet::new());
+/// for c in "abc".chars() {
+///     x.add(c);
+/// }
+/// assert_eq!(x.query(&'a'), true);
+/// assert_eq!(x.query(&'z'), false);
+/// assert!(x.le(&GSet::new("abcdef".chars().collect())));
+/// let y = GSet::new("cdefg".chars().collect());
+/// assert_eq!(x.merge(&y).payload(), y.merge(&x).payload());
+/// let z = GSet::new("8675309abcdefg".chars().collect());
+/// assert_eq!(x.merge(&y.merge(&z)).payload(), x.merge(&y).merge(&z).payload());
+/// ```
 #[derive(Debug, Clone)]
 pub struct GSet<X: Clone + Eq + Hash> {
+    /// The contents of this set
     pub values: HashSet<X>,
 }
 
