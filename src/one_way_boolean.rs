@@ -13,6 +13,7 @@ use crate::traits::Grow;
 /// for payload in vec![true, false] {
 ///     let y = OneWayBoolean::new(payload);
 ///     assert_eq!(x.merge(&y).payload(), y.merge(&x).payload());
+///     assert!(y.le(&x));
 /// }
 /// ```
 #[derive(Debug, Clone)]

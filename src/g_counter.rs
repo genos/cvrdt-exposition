@@ -27,11 +27,14 @@ use crate::traits::Grow;
 ///
 /// # Example
 ///
+/// Example usage, including demonstrating some properties:
+///
 /// ```
 /// use cvrdt_exposition::{GCounter, Grow};
 /// let mut x = GCounter::new((0, vec![0; 3]));
 /// x.add(());
 /// assert_eq!(x.payload(), (0, vec![1, 0, 0]));
+/// assert_eq!(x.query(&()), 1);
 /// let mut y = GCounter::new((1, vec![0; 3]));
 /// y.add(());
 /// y.add(());
@@ -39,6 +42,17 @@ use crate::traits::Grow;
 /// let z = GCounter::new((2, vec![0, 0, 3]));
 /// assert_eq!(x.merge(&y).merge(&z).payload(), (0, vec![1, 2, 3]));
 /// assert_eq!(x.merge(&y.merge(&z)).payload(), x.merge(&y).merge(&z).payload());
+/// ```
+///
+/// As mentioned above, operations panic when trying dealing with two or more `GCounter`s of
+/// incompatible sizes:
+///
+/// ```should_panic
+/// // This will panic
+/// use cvrdt_exposition::{GCounter, Grow};
+/// let x = GCounter::new((0, vec![0]));
+/// let y = GCounter::new((1, vec![0, 0]));
+/// x.merge(&y);
 /// ```
 #[derive(Debug, Clone)]
 pub struct GCounter {
