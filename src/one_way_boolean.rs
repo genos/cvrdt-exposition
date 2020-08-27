@@ -3,7 +3,8 @@ use crate::traits::Grow;
 /// A boolean flag that, once true, can never revert to false
 ///
 /// # Example
-/// ```rust
+///
+/// ```
 /// use cvrdt_exposition::{Grow, OneWayBoolean};
 /// let mut x = OneWayBoolean::new(false);
 /// x.add(());
@@ -16,7 +17,8 @@ use crate::traits::Grow;
 /// ```
 #[derive(Debug, Clone)]
 pub struct OneWayBoolean {
-    flag: bool,
+    /// The internal state of a `OneWayBoolean` is a single boolean flag
+    pub flag: bool,
 }
 
 impl Grow for OneWayBoolean {

@@ -43,7 +43,7 @@
 //! ## Example
 //!
 //! Per the [Wikipedia article](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type), consider a one-way boolean flag that, once true, can never revert to false:
-//! ```rust
+//! ```
 //! use cvrdt_exposition::{Grow, OneWayBoolean};
 //! let x = OneWayBoolean::new(false);
 //! let mut y = OneWayBoolean::new(false);

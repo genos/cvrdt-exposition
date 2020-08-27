@@ -3,8 +3,8 @@ use std::time::Instant;
 
 #[derive(Debug, Clone)]
 pub struct LWWRegister<X: Clone + Eq> {
-    value: X,
-    timestamp: Instant,
+    pub value: X,
+    pub timestamp: Instant,
 }
 
 impl<X: Clone + Eq> Grow for LWWRegister<X> {
