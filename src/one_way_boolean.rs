@@ -2,7 +2,7 @@ use crate::traits::Grow;
 
 /// A boolean flag that, once true, can never revert to false
 ///
-/// # Example
+/// # Examples
 ///
 /// ```
 /// use cvrdt_exposition::{Grow, OneWayBoolean};

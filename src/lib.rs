@@ -40,7 +40,7 @@
 //! This can be impossible to do via brute force, as the number of states to check can quickly get prohibitively large.
 //! See the [penultimate section](#how-cvrdt-exposition-verifies-properties) for how `cvrdt-exposition` verifies these properties.
 //!
-//! ## Example
+//! ## Examples
 //!
 //! Per the [Wikipedia article](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type), consider a one-way boolean flag that, once true, can never revert to false:
 //! ```

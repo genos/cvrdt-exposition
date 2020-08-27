@@ -14,6 +14,17 @@ use crate::traits::Grow;
 /// - this library is meant to be as simple and expository as possible, so I'd like to avoid
 /// fancier things like [`generic_array`](https://docs.rs/generic-array/0.14.4/generic_array/)
 ///
+/// As mentioned above, operations panic when trying dealing with two or more `GCounter`s of
+/// incompatible sizes:
+///
+/// ```should_panic
+/// // This will panic
+/// use cvrdt_exposition::{GCounter, Grow};
+/// let x = GCounter::new((0, vec![0]));
+/// let y = GCounter::new((1, vec![0, 0]));
+/// x.merge(&y);
+/// ```
+///
 /// # Difference from references
 ///
 /// In the [comprehensive study paper](https://hal.inria.fr/inria-00555588/) and the [Wikipedia
@@ -25,7 +36,7 @@ use crate::traits::Grow;
 /// choice that when merging two `GCounter`s, we take the minimum of their two `id`s as the new
 /// one.
 ///
-/// # Example
+/// # Examples
 ///
 /// Example usage, including demonstrating some properties:
 ///
@@ -40,19 +51,9 @@ use crate::traits::Grow;
 /// y.add(());
 /// assert_eq!(x.merge(&y).payload(), (0, vec![1, 2, 0]));
 /// let z = GCounter::new((2, vec![0, 0, 3]));
+/// assert!(x.le(&x.merge(&y).merge(&z)));
 /// assert_eq!(x.merge(&y).merge(&z).payload(), (0, vec![1, 2, 3]));
 /// assert_eq!(x.merge(&y.merge(&z)).payload(), x.merge(&y).merge(&z).payload());
-/// ```
-///
-/// As mentioned above, operations panic when trying dealing with two or more `GCounter`s of
-/// incompatible sizes:
-///
-/// ```should_panic
-/// // This will panic
-/// use cvrdt_exposition::{GCounter, Grow};
-/// let x = GCounter::new((0, vec![0]));
-/// let y = GCounter::new((1, vec![0, 0]));
-/// x.merge(&y);
 /// ```
 #[derive(Debug, Clone)]
 pub struct GCounter {

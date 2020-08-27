@@ -4,7 +4,7 @@ use crate::traits::{Grow, Shrink};
 ///
 /// # Panics
 ///
-/// Like [`GCounter`s](../g_counter/struct.GCounter.html), ny function involving two or more
+/// Like [`GCounter`s](../g_counter/struct.GCounter.html), any function involving two or more
 /// `PNCounter`s (viz. `le` and `merge`) will panic (via `assert_eq!`) if their counts vectors are
 /// not the same length. What's more, since `PNCounter`s involve _two_ vectorized counts, any
 /// instantiation (via `new`) will also panic if the lengths of the positive and negative count
@@ -15,37 +15,6 @@ use crate::traits::{Grow, Shrink};
 /// yet
 /// - this library is meant to be as simple and expository as possible, so I'd like to avoid
 /// fancier things like [`generic_array`](https://docs.rs/generic-array/0.14.4/generic_array/)
-///
-/// # Difference from references
-///
-/// In the [comprehensive study paper](https://hal.inria.fr/inria-00555588/) and the [Wikipedia
-/// article](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type), the vectorized
-/// `PNCounter` presumes a local `myID()` function that tells our local `PNCounter` the index to
-/// update in its counts array. This detail isn't necessary for understanding how their pseudocode
-/// works, but it _is_ required if you're trying to implement a `PNCounter` in real code. As such,
-/// we explicitly include the `id` as a member of our `PNCounter` struct, and make the _arbitrary_
-/// choice that when merging two `PNCounter`s, we take the minimum of their two `id`s as the new
-/// one.
-///
-/// # Example
-///
-/// Example usage, including demonstrating some properties:
-///
-/// ```
-/// use cvrdt_exposition::{Grow, PNCounter, Shrink};
-/// let mut x = PNCounter::new((0, vec![0; 2], vec![0; 2]));
-/// x.add(());
-/// x.del(());
-/// x.add(());
-/// x.add(());
-/// assert_eq!(x.payload(), (0, vec![3, 0], vec![1, 0]));
-/// assert_eq!(x.query(&()), 2);
-/// let y = PNCounter::new((1, vec![0, 3], vec![0, 0]));
-/// let z = x.merge(&y);
-/// assert_eq!(z.payload(), (0, vec![3, 3], vec![1, 0]));
-/// assert_eq!(z.payload(), y.merge(&x).payload());
-/// assert_eq!(z.query(&()), 5);
-/// ```
 ///
 /// As mentioned above, operations panic when trying dealing with two or more `PNCounter`s of
 /// incompatible sizes:
@@ -73,6 +42,37 @@ use crate::traits::{Grow, Shrink};
 /// // This will panic
 /// use cvrdt_exposition::{PNCounter, Grow};
 /// let x = PNCounter::new((17, vec![0], vec![0]));
+/// ```
+///
+/// # Difference from references
+///
+/// In the [comprehensive study paper](https://hal.inria.fr/inria-00555588/) and the [Wikipedia
+/// article](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type), the vectorized
+/// `PNCounter` presumes a local `myID()` function that tells our local `PNCounter` the index to
+/// update in its counts array. This detail isn't necessary for understanding how their pseudocode
+/// works, but it _is_ required if you're trying to implement a `PNCounter` in real code. As such,
+/// we explicitly include the `id` as a member of our `PNCounter` struct, and make the _arbitrary_
+/// choice that when merging two `PNCounter`s, we take the minimum of their two `id`s as the new
+/// one.
+///
+/// # Examples
+///
+/// Example usage, including demonstrating some properties:
+///
+/// ```
+/// use cvrdt_exposition::{Grow, PNCounter, Shrink};
+/// let mut x = PNCounter::new((0, vec![0; 2], vec![0; 2]));
+/// x.add(());
+/// x.del(());
+/// x.add(());
+/// x.add(());
+/// assert_eq!(x.payload(), (0, vec![3, 0], vec![1, 0]));
+/// assert_eq!(x.query(&()), 2);
+/// let y = PNCounter::new((1, vec![0, 3], vec![0, 0]));
+/// let z = x.merge(&y);
+/// assert_eq!(z.payload(), (0, vec![3, 3], vec![1, 0]));
+/// assert_eq!(z.payload(), y.merge(&x).payload());
+/// assert_eq!(z.query(&()), 5);
 /// ```
 #[derive(Debug, Clone)]
 pub struct PNCounter {

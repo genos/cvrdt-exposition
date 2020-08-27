@@ -1,6 +1,43 @@
 use crate::traits::Grow;
 use std::time::Instant;
 
+/// A last-write-wins register
+///
+/// # Panics
+///
+/// Any attempt to `add` a new element to this register will panic if the register's `timestamp` is
+/// greater than `Instant::now()` (no time-traveling allowed) at the time of calling `add`:
+///
+/// ```should_panic
+/// // This will panic
+/// use std::time::{Duration, Instant};
+/// use cvrdt_exposition::{Grow, LWWRegister};
+/// let mut x = LWWRegister::new(('a', Instant::now() + Duration::from_secs(1729)));
+/// x.add('b');
+/// ```
+///
+/// # Difference from references
+///
+/// In the [comprehensive study paper](https://hal.inria.fr/inria-00555588/), timestamps are
+/// unsigned integers, whereas we use
+/// [`std::time::Instant`s](https://doc.rust-lang.org/std/time/struct.Instant.html).
+///
+/// # Examples
+///
+/// ```
+/// use std::time::Instant;
+/// use cvrdt_exposition::{Grow, LWWRegister};
+/// let mut x = LWWRegister::new(('a', Instant::now()));
+/// x.add('b');
+/// x.add('c');
+/// assert_eq!(x.query(&()), 'c');
+/// let y = LWWRegister::new(('z', Instant::now()));
+/// assert!(x.le(&y));
+/// let z = x.merge(&y);
+/// assert_eq!(y.merge(&x).payload(), z.payload());
+/// assert_eq!(z.query(&()), 'z');
+/// assert_eq!(z.payload().0, 'z');
+/// ```
 #[derive(Debug, Clone)]
 pub struct LWWRegister<X: Clone + Eq> {
     pub value: X,
@@ -24,7 +61,7 @@ impl<X: Clone + Eq> Grow for LWWRegister<X> {
     }
     fn add(&mut self, update: Self::Update) {
         let now = Instant::now();
-        assert!(now >= self.timestamp, "Time should be monotonic");
+        assert!(self.timestamp <= now, "Time should be monotonic");
         self.value = update;
         self.timestamp = now;
     }
