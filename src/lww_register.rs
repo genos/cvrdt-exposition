@@ -2,12 +2,12 @@ use crate::traits::Grow;
 use std::time::Instant;
 
 #[derive(Debug, Clone)]
-pub struct LWWRegister<X: Clone + Eq> {
+pub struct LWWRegister<X: Clone> {
     pub value: X,
     pub timestamp: Instant,
 }
 
-impl<X: Clone + Eq> Grow for LWWRegister<X> {
+impl<X: Clone> Grow for LWWRegister<X> {
     type Payload = (X, Instant);
     type Update = X;
     type Query = ();
