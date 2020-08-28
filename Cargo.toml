@@ -3,6 +3,10 @@ name = "cvrdt-exposition"
 version = "0.1.0"
 authors = ["genos <graham.enos@gmail.com>"]
 edition = "2018"
+description = "Understanding Convergent Replicated Data Types"
+license-file = "LICENSE"
+readme = "README.md"
+repository = "https://github.com/genos/cvrdt-exposition"
 
 [dependencies]
 
