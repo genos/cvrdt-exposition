@@ -1,5 +1,7 @@
 # Understanding Convergent Replicated Data Types
 
+[![Build Status](https://travis-ci.com/genos/cvrdt-exposition.svg?branch=main)](https://travis-ci.com/genos/cvrdt-exposition)
+
 I wanted to understand CRDTs more, so I put together this Rust library for state-based CRDTs a.k.a. convergent replicated data types a.k.a. CvRDTs.
 It aims to present an explicit (with strong types, etc.) and unified description of the CvRDTs presented in the _wonderful_ paper [A comprehensive study of Convergent and Commutative Replicated Data Types](https://hal.inria.fr/inria-00555588/).
 
