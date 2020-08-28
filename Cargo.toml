@@ -5,7 +5,7 @@ authors = ["genos <graham.enos@gmail.com>"]
 edition = "2018"
 description = "Understanding Convergent Replicated Data Types"
 license-file = "LICENSE"
-homepage = "https://grahamenos.com"
+homepage = "https://github.com/genos/cvrdt-exposition"
 readme = "README.md"
 repository = "https://github.com/genos/cvrdt-exposition"
 
