@@ -9,7 +9,7 @@ use std::time::Instant;
 /// greater than `Instant::now()` (no time-traveling allowed) at the time of calling `add`:
 ///
 /// ```should_panic
-/// // This will panic
+/// // this will panic
 /// use std::time::{Duration, Instant};
 /// use cvrdt_exposition::{Grow, LWWRegister};
 /// let mut x = LWWRegister::new(('a', Instant::now() + Duration::from_secs(1729)));
@@ -23,6 +23,8 @@ use std::time::Instant;
 /// [`std::time::Instant`s](https://doc.rust-lang.org/std/time/struct.Instant.html).
 ///
 /// # Examples
+///
+/// Example usage, including demonstrating some properties:
 ///
 /// ```
 /// use std::time::Instant;

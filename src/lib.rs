@@ -85,8 +85,8 @@
 //! - [`rust-crdt`](https://github.com/rust-crdt/rust-crdt)
 //! - [`meangirls`](https://github.com/aphyr/meangirls)
 //! - [The `proptest` book](https://altsysrq.github.io/proptest-book/intro.html)
-#![crate_type = "lib"]
-#![deny(missing_docs)]
+#![forbid(unsafe_code)]
+#![forbid(missing_docs)]
 
 /// Our two traits defining CvRDTs
 pub mod traits;

@@ -18,7 +18,7 @@ use crate::traits::Grow;
 /// incompatible sizes:
 ///
 /// ```should_panic
-/// // This will panic
+/// // this will panic
 /// use cvrdt_exposition::{GCounter, Grow};
 /// let x = GCounter::new((0, vec![0]));
 /// let y = GCounter::new((1, vec![0, 0]));

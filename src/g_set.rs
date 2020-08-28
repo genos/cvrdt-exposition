@@ -6,6 +6,8 @@ use std::hash::Hash;
 ///
 /// # Examples
 ///
+/// Example usage, including demonstrating some properties:
+///
 /// ```
 /// use std::collections::HashSet;
 /// use cvrdt_exposition::{Grow, GSet};

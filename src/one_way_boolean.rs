@@ -4,6 +4,8 @@ use crate::traits::Grow;
 ///
 /// # Examples
 ///
+/// Example usage, including demonstrating some properties:
+///
 /// ```
 /// use cvrdt_exposition::{Grow, OneWayBoolean};
 /// let mut x = OneWayBoolean::new(false);

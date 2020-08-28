@@ -20,7 +20,7 @@ use crate::traits::{Grow, Shrink};
 /// incompatible sizes:
 ///
 /// ```should_panic
-/// // This will panic
+/// // this will panic
 /// use cvrdt_exposition::{PNCounter, Grow};
 /// let x = PNCounter::new((0, vec![0], vec![0]));
 /// let y = PNCounter::new((1, vec![0, 0], vec![0, 0]));
@@ -31,7 +31,7 @@ use crate::traits::{Grow, Shrink};
 /// `negative` lengths:
 ///
 /// ```should_panic
-/// // This will panic
+/// // this will panic
 /// use cvrdt_exposition::{PNCounter, Grow};
 /// let x = PNCounter::new((0, vec![0], vec![0, 0]));
 /// ```
@@ -39,7 +39,7 @@ use crate::traits::{Grow, Shrink};
 /// Or if we specify an `id` outside the length of the `positive` or `negative` counts:
 ///
 /// ```should_panic
-/// // This will panic
+/// // this will panic
 /// use cvrdt_exposition::{PNCounter, Grow};
 /// let x = PNCounter::new((17, vec![0], vec![0]));
 /// ```
