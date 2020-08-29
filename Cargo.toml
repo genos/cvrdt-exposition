@@ -1,13 +1,14 @@
 [package]
 name = "cvrdt-exposition"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["genos <graham.enos@gmail.com>"]
 edition = "2018"
 description = "Understanding Convergent Replicated Data Types"
-license-file = "LICENSE"
-homepage = "https://docs.rs/cvrdt-exposition/0.1.0/cvrdt_exposition/"
+license = "MIT"
+homepage = "https://docs.rs/cvrdt-exposition/"
 readme = "README.md"
 repository = "https://github.com/genos/cvrdt-exposition"
+keywords = ["crdt", "data-structures", "distributed-systems", "exposition"]
 
 [dependencies]
 

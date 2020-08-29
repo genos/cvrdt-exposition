@@ -110,7 +110,7 @@ mod tests {
         (
             prop::collection::hash_set(any::<i8>(), 0..MAX_SIZE),
             prop::collection::hash_set(any::<i8>(), 0..MAX_SIZE),
-            any::<i8>()
+            any::<i8>(),
         )
             .prop_flat_map(|(mut added, mut removed, x)| {
                 added.insert(x);
