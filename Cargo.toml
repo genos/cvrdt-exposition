@@ -1,6 +1,6 @@
 [package]
 name = "cvrdt-exposition"
-version = "0.1.2"
+version = "0.1.2.1"
 authors = ["genos <graham.enos@gmail.com>"]
 edition = "2018"
 description = "Understanding Convergent Replicated Data Types"
