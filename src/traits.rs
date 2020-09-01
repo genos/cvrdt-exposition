@@ -1,7 +1,7 @@
 /// CvRDTs that can only grow, i.e. only add items
 pub trait Grow: Clone {
     /// The internal state of our CvRDT; sufficient to build a new copy via [`new`](#tymethod.new).
-    /// Required to implement `Eq` for testing an verification.
+    /// Required to implement `Eq` for testing and verification.
     type Payload: Eq;
 
     /// Message to update our internal state
