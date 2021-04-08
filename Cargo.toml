@@ -1,6 +1,6 @@
 [package]
 name = "cvrdt-exposition"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["genos <graham.enos@gmail.com>"]
 edition = "2018"
 description = "Understanding Convergent Replicated Data Types"
@@ -13,4 +13,4 @@ keywords = ["crdt", "data-structures", "distributed-systems", "exposition"]
 [dependencies]
 
 [dev-dependencies]
-proptest = "0.10.1"
+proptest = "1.0.0"
