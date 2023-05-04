@@ -10,7 +10,11 @@ readme = "README.md"
 repository = "https://github.com/genos/cvrdt-exposition"
 keywords = ["crdt", "data-structures", "distributed-systems", "exposition"]
 
-[dependencies]
-
 [dev-dependencies]
-proptest = "1.0.0"
+proptest = "1.1.0"
+
+[profile.release]
+codegen-units = 1
+lto = true
+panic = "abort"
+strip = true
