@@ -1,6 +1,6 @@
 # Understanding Convergent Replicated Data Types
 
-[![Build Status](https://travis-ci.com/genos/cvrdt-exposition.svg?branch=main)](https://travis-ci.com/genos/cvrdt-exposition)
+[Build Status](https://github.com/genos/cvrdt-exposition/actions/workflows/ci.yml/badge.svg)
 [![Crates.io](https://img.shields.io/crates/v/cvrdt-exposition)](https://crates.io/crates/cvrdt-exposition)
 [![Docs.rs](https://docs.rs/cvrdt-exposition/badge.svg)](https://docs.rs/cvrdt-exposition/)
 
