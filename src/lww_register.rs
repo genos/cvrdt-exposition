@@ -87,12 +87,12 @@ impl<X: Clone + Eq> Grow for LWWRegister<X> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::grow_properties;
+    use crate::properties::grow;
     use proptest::prelude::*;
 
     fn cvrdt() -> impl Strategy<Value = LWWRegister<String>> {
         any::<String>().prop_map(|value| LWWRegister {
-            value: value,
+            value,
             timestamp: Instant::now(),
         })
     }
@@ -101,5 +101,5 @@ mod tests {
         (cvrdt(), ".*")
     }
 
-    grow_properties!(cvrdt, cvrdt_and_update);
+    grow!(cvrdt, cvrdt_and_update);
 }

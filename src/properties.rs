@@ -1,6 +1,5 @@
 /// Properties that `Grow` implementations must satisfy
-#[macro_export]
-macro_rules! grow_properties {
+macro_rules! grow {
     ($arb_cvrdt:ident, $arb_cvrdt_and_addend:ident) => {
         proptest! {
             #[test]
@@ -65,9 +64,10 @@ macro_rules! grow_properties {
     };
 }
 
+pub(crate) use grow;
+
 /// Properties that `Shrink` implementations must satisfy
-#[macro_export]
-macro_rules! shrink_properties {
+macro_rules! shrink {
     ($arb_cvrdt_and_subtrahend:ident) => {
         proptest! {
             #[test]
@@ -79,3 +79,5 @@ macro_rules! shrink_properties {
         }
     };
 }
+
+pub(crate) use shrink;

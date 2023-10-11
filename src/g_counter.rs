@@ -113,7 +113,7 @@ impl Grow for GCounter {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::grow_properties;
+    use crate::properties::grow;
     use proptest::prelude::*;
 
     static MAX_SIZE: usize = 100;
@@ -137,5 +137,5 @@ mod tests {
         (1..MAX_SIZE).prop_flat_map(sized).prop_map(|g| (g, ()))
     }
 
-    grow_properties!(two, three, cvrdt_and_update);
+    grow!(two, three, cvrdt_and_update);
 }

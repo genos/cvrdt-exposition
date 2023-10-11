@@ -89,7 +89,7 @@ impl<X: Clone + Eq + Hash> Shrink for TwoPhaseSet<X> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{grow_properties, shrink_properties};
+    use crate::properties::{grow, shrink};
     use proptest::prelude::*;
 
     static MAX_SIZE: usize = 100;
@@ -120,6 +120,6 @@ mod tests {
             })
     }
 
-    grow_properties!(cvrdt, cvrdt_and_addend);
-    shrink_properties!(cvrdt_and_subtrahend);
+    grow!(cvrdt, cvrdt_and_addend);
+    shrink!(cvrdt_and_subtrahend);
 }

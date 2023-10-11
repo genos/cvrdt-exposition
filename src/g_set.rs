@@ -60,7 +60,7 @@ impl<X: Clone + Eq + Hash> Grow for GSet<X> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::grow_properties;
+    use crate::properties::grow;
     use proptest::prelude::*;
 
     static MAX_SIZE: usize = 100;
@@ -73,5 +73,5 @@ mod tests {
         (cvrdt(), ".*")
     }
 
-    grow_properties!(cvrdt, cvrdt_and_update);
+    grow!(cvrdt, cvrdt_and_update);
 }
