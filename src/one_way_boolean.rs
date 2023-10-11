@@ -55,7 +55,7 @@ impl Grow for OneWayBoolean {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::grow_properties;
+    use crate::properties::grow;
     use proptest::prelude::*;
 
     fn cvrdt() -> impl Strategy<Value = OneWayBoolean> {
@@ -66,5 +66,5 @@ mod tests {
         (cvrdt(), Just(()))
     }
 
-    grow_properties!(cvrdt, cvrdt_and_update);
+    grow!(cvrdt, cvrdt_and_update);
 }

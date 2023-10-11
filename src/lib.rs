@@ -1,20 +1,20 @@
 //! # Understanding Convergent Replicated Data Types
 //!
-//! I wanted to understand CRDTs more, so I put together this Rust library for state-based CRDTs a.k.a. convergent replicated data types a.k.a. CvRDTs.
-//! It aims to present an explicit (with strong types, etc.) and unified description of the CvRDTs presented in the _wonderful_ paper [A comprehensive study of Convergent and Commutative Replicated Data Types](https://hal.inria.fr/inria-00555588/).
+//! I wanted to understand CRDTs more, so I put together this Rust library for state-based CRDTs a.k.a. convergent replicated data types a.k.a. `CvRDTs`.
+//! It aims to present an explicit (with strong types, etc.) and unified description of the `CvRDTs` presented in the _wonderful_ paper [A comprehensive study of Convergent and Commutative Replicated Data Types](https://hal.inria.fr/inria-00555588/).
 //!
 //! ## Do not use this!
 //!
 //! This code is solely for my own edification and is _not_ meant for production use.
 //! There are already much better options for usable CRDTs in Rust; see the [`rust-crdt`](https://github.com/rust-crdt/rust-crdt) project.
 //!
-//! ## What makes a CvRDT?
+//! ## What makes a `CvRDT`?
 //!
 //! Quoting the [Wikipedia article on CRDTs](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type),
-//! > CvRDTs send their full local state to other replicas, where the states are merged by a function which must be commutative, associative, and idempotent.
+//! > `CvRDTs` send their full local state to other replicas, where the states are merged by a function which must be commutative, associative, and idempotent.
 //!
-//! So suppose we've just written a brand new data type, and we'd like to demonstrate it's a CvRDT.
-//! Suppose further that _x_, _y_, and _z_ are any arbitrary members of our data type, and that our data type has a merge function called _merge_; for our type to be a CvRDT, we need the following three things to be true for **any** values of _x_, _y_, and _z_:
+//! So suppose we've just written a brand new data type, and we'd like to demonstrate it's a `CvRDT`.
+//! Suppose further that _x_, _y_, and _z_ are any arbitrary members of our data type, and that our data type has a merge function called _merge_; for our type to be a `CvRDT`, we need the following three things to be true for **any** values of _x_, _y_, and _z_:
 //! 1. _merge(x, y) = merge(y, x)_
 //! 2. _merge(x, merge(y, z)) = merge(merge(x, y), z)_
 //! 3. _merge(merge(x, y), y) = merge(x, y)_
@@ -36,7 +36,7 @@
 //! That is, we need the internal state to increase monotonically (as Wikipedia says in the above quote) even in the face of removals.
 //! Suppose our type has a function
 //!
-//! Ideally we'd check these requirements for **every** possible configuration of our new CvRDT implementation.
+//! Ideally we'd check these requirements for **every** possible configuration of our new `CvRDT` implementation.
 //! This can be impossible to do via brute force, as the number of states to check can quickly get prohibitively large.
 //! See the [penultimate section](#how-cvrdt-exposition-verifies-properties) for how `cvrdt-exposition` verifies these properties.
 //!
@@ -52,7 +52,7 @@
 //! assert_eq!(y.merge(&x).payload(), true);
 //! ```
 //!
-//! As the internal state of a `OneWayBoolean` is only a single boolean value, we could verify the implementation fulfills the CvRDT requirements  by hand (though I'd rather get my computer to do it! see below).
+//! As the internal state of a `OneWayBoolean` is only a single boolean value, we could verify the implementation fulfills the `CvRDT` requirements  by hand (though I'd rather get my computer to do it! see below).
 //!
 //! ## How `cvrdt-exposition` verifies properties
 //!
@@ -60,8 +60,8 @@
 //! This excellent crate is listed as a `dev-dependency` in [`cvrdt-exposition`'s `Cargo.tml` file](https://github.com/genos/cvrdt-exposition/blob/main/Cargo.toml), so if you can just use the stuff in this library (although [you shouldn't!](do-not-use-this)) without pulling in an extra dependency.
 //! That said, I highly recommend learning to use `proptest`, [`quickcheck`](https://crates.io/crates/quickcheck), or some other [property testing framework](https://crates.io/search?q=property%20testing) for Rust.
 //!
-//! In the `cfg(test)`-only [`properties` module](https://github.com/genos/cvrdt/blob/main/src/properties.rs), `cvrdt-exposition` defines macros for automating checking CvRDT properties.
-//! For instance, given a function `arb_cvrdt2` that yields an arbitrary pair of elements of our CvRDT type, `proptest`'s `proptest!` macro allows us to test that our CvRDT's merge function is commutative via:
+//! In the `cfg(test)`-only [`properties` module](https://github.com/genos/cvrdt/blob/main/src/properties.rs), `cvrdt-exposition` defines macros for automating checking `CvRDT` properties.
+//! For instance, given a function `arb_cvrdt2` that yields an arbitrary pair of elements of our `CvRDT` type, `proptest`'s `proptest!` macro allows us to test that our `CvRDT`'s merge function is commutative via:
 //!
 //! ```ignore
 //! proptest! {
@@ -75,7 +75,7 @@
 //! };
 //! ```
 //!
-//! Note that the above code uses the `cvrdt-exposition` nomenclature `Grow`, which we use to distinguish CvRDTs that are grow-only from those that can also remove elements.
+//! Note that the above code uses the `cvrdt-exposition` nomenclature `Grow`, which we use to distinguish `CvRDTs` that are grow-only from those that can also remove elements.
 //! See the [traits documentation](traits/index.html) for more.
 //!
 //! ## References
@@ -88,7 +88,7 @@
 #![forbid(unsafe_code)]
 #![forbid(missing_docs)]
 
-/// Our two traits defining CvRDTs
+/// Our two traits defining `CvRDTs`
 pub mod traits;
 
 /// Grow-Only Counter
@@ -97,7 +97,7 @@ pub mod g_counter;
 pub mod g_set;
 /// Last-Writer-Wins Register
 pub mod lww_register;
-/// The simplest CvRDT example: a boolean flag that, once true, can never revert to false
+/// The simplest `CvRDT` example: a boolean flag that, once true, can never revert to false
 pub mod one_way_boolean;
 /// Positive-Negative Counter
 pub mod pn_counter;
@@ -115,6 +115,6 @@ pub use crate::{
     two_phase_set::TwoPhaseSet,
 };
 
-/// PBT for CvRDT properties
+/// PBT for `CvRDT` properties
 #[cfg(test)]
-pub mod properties;
+pub(crate) mod properties;

@@ -163,7 +163,7 @@ impl Shrink for PNCounter {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{grow_properties, shrink_properties};
+    use crate::properties::{grow, shrink};
     use proptest::prelude::*;
 
     static MAX_SIZE: usize = 100;
@@ -194,6 +194,6 @@ mod tests {
         (1..MAX_SIZE).prop_flat_map(sized).prop_map(|p| (p, ()))
     }
 
-    grow_properties!(two, three, cvrdt_and_update);
-    shrink_properties!(cvrdt_and_update);
+    grow!(two, three, cvrdt_and_update);
+    shrink!(cvrdt_and_update);
 }
